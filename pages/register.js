@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
+import { useState } from "react"; // Importing the useState hook from React
+import { useRouter } from "next/router"; // Importing useRouter from Next.js for client-side navigation
 import {
   Container,
   TextField,
@@ -9,28 +9,29 @@ import {
   Grid,
   Card,
   CardContent,
-} from "@mui/material";
-import Image from "next/image";
-import registerImage from "../assets/register.png"; // Replace with your image path
+} from "@mui/material"; // Importing Material-UI components
+import Image from "next/image"; // Importing Image component from Next.js for optimized image loading
+import registerImage from "../assets/register.png"; // Importing an image for the registration page
 
 export default function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const router = useRouter();
+  const [email, setEmail] = useState(""); // State to store the user's email
+  const [password, setPassword] = useState(""); // State to store the user's password
+  const router = useRouter(); // Router instance for navigation
 
+  // Function to handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent the default form submission
     const res = await fetch("http://localhost:5001/api/auth/register", {
-      method: "POST",
+      method: "POST", // Specify the HTTP method as POST
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json", // Set the request content type to JSON
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password }), // Send email and password in the request body
     });
     if (res.ok) {
-      router.push("/login");
+      router.push("/login"); // Redirect to the login page on successful registration
     } else {
-      console.error("Error registering");
+      console.error("Error registering"); // Log an error message if registration fails
     }
   };
 
@@ -42,14 +43,16 @@ export default function Register() {
         alignItems: "center",
         justifyContent: "center",
         height: "100vh",
+        padding: { xs: 2, md: 4 }, 
       }}
     >
       <Card
         sx={{
           display: "flex",
+          flexDirection: { xs: "column", md: "row" }, // Stack vertically on small screens
           width: "100%",
           maxWidth: 1000,
-          p: 8,
+          p: { xs: 2, md: 8 }, 
           borderRadius: 20,
         }}
       >
@@ -60,11 +63,13 @@ export default function Register() {
                 position: "relative",
                 width: "100%",
                 height: "100%",
-                minHeight: 400, // Ensure the image has a minimum height
+                minHeight: 300, 
+                maxHeight: 500,
+                mb: { xs: 2, md: 0 }, 
               }}
             >
               <Image
-                src={registerImage} // Image related to a registration or account creation
+                src={registerImage}
                 alt="Register"
                 layout="fill"
                 objectFit="cover"
@@ -80,10 +85,15 @@ export default function Register() {
                 alignItems: "center",
                 justifyContent: "center",
                 height: "100%",
-                padding: 4, // Increase padding for a larger card feel
+                padding: { xs: 2, md: 4 }, 
               }}
             >
-              <Typography component="h1" variant="h4" mb={3}>
+              <Typography
+                component="h1"
+                variant="h4"
+                mb={3}
+                sx={{ fontSize: { xs: "24px", md: "32px" } }} 
+              >
                 Register
               </Typography>
               <form onSubmit={handleSubmit} style={{ width: "100%" }}>
@@ -98,6 +108,7 @@ export default function Register() {
                   onChange={(e) => setEmail(e.target.value)}
                   autoComplete="email"
                   autoFocus
+                  sx={{ fontSize: { xs: "14px", md: "16px" } }} 
                 />
                 <TextField
                   variant="outlined"
@@ -109,6 +120,7 @@ export default function Register() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="new-password"
+                  sx={{ fontSize: { xs: "14px", md: "16px" } }} 
                 />
                 <Button
                   type="submit"
@@ -122,6 +134,7 @@ export default function Register() {
                     borderRadius: 10,
                     backgroundColor: "#F50057",
                     "&:hover": { backgroundColor: "#C51162" },
+                    fontSize: { xs: "14px", md: "16px" }, 
                   }}
                 >
                   Register

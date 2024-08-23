@@ -12,6 +12,7 @@ import {
   ListItemText,
   TextField,
   Button,
+  ListItemIcon,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -32,6 +33,7 @@ export default function TaskCard({
   onEditComment,
   onDeleteComment,
 }) {
+  // State management for modal visibility and form fields
   const [open, setOpen] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title); // For editing task title
   const [subtaskTitle, setSubtaskTitle] = useState(""); // For new subtask or editing subtask
@@ -39,27 +41,34 @@ export default function TaskCard({
   const [commentText, setCommentText] = useState(""); // For new and editing comments
   const [editingCommentId, setEditingCommentId] = useState(null); // For editing comments
 
+  // Function to open the modal
   const handleOpen = () => setOpen(true);
+
+  // Function to close the modal and reset form states
   const handleClose = () => {
     setOpen(false);
     handleCancelEdit(); // Reset editing states when closing the modal
   };
 
+  // Function to prepare a comment for editing
   const handleEditCommentClick = (comment, index) => {
     setCommentText(comment.text);
     setEditingCommentId(comment._id);
   };
 
+  // Function to save changes made to the task title
   const handleSaveChanges = () => {
     onEditTask(task._id, editedTitle);
     handleClose();
   };
 
+  // Function to prepare a subtask for editing
   const handleEditSubtaskClick = (subtask, index) => {
     setSubtaskTitle(subtask.title); // Set the current title of the subtask in the input field
     setEditingSubtaskIndex(index); // Set the index of the subtask being edited
   };
 
+  // Function to save changes made to a subtask
   const handleSaveSubtaskChanges = () => {
     if (editingSubtaskIndex !== null) {
       onEditSubtask(task._id, editingSubtaskIndex, subtaskTitle);
@@ -67,6 +76,7 @@ export default function TaskCard({
     }
   };
 
+  // Function to save changes made to a comment
   const handleSaveCommentChanges = () => {
     if (editingCommentId !== null) {
       onEditComment(task._id, editingCommentId, commentText);
@@ -74,6 +84,7 @@ export default function TaskCard({
     }
   };
 
+  // Function to reset all editing states and clear input fields
   const handleCancelEdit = () => {
     setEditingSubtaskIndex(null); // Reset the editing subtask index
     setSubtaskTitle(""); // Clear the subtask title input
@@ -86,30 +97,39 @@ export default function TaskCard({
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: "90%", // Responsive width
+    maxWidth: 500, // Maximum width
     bgcolor: "background.paper",
     boxShadow: 24,
     borderRadius: 8,
-    p: 8,
+    p: { xs: 2, md: 4 }, // Responsive padding
+    overflowY: "auto", // Ensures content doesn't overflow on smaller screens
+    maxHeight: "90vh", // Ensures the modal doesn't exceed the viewport height
   };
 
   return (
     <>
       <Card
         onClick={handleOpen}
-        sx={{ marginBottom: 2, cursor: "pointer", borderRadius: 4 }}
+        sx={{
+          marginBottom: 2,
+          cursor: "pointer",
+          borderRadius: 4,
+          padding: { xs: 1, md: 2 },
+        }}
       >
         <CardContent
           sx={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            flexDirection: { xs: "column", md: "row" }, // Column for small screens, row for larger
           }}
         >
           <Typography
-            variant="h3"
-            component="h3"
-            sx={{ fontSize: "32px", fontWeight: "bold" }}
+            variant="h5"
+            component="h5"
+            sx={{ fontSize: { xs: "20px", md: "32px" }, fontWeight: "bold" }}
           >
             {task.title}
           </Typography>
@@ -123,26 +143,57 @@ export default function TaskCard({
             checkedIcon={<CheckCircleIcon />}
             sx={{
               "& .MuiSvgIcon-root": {
-                fontSize: 28, // Increase the size to make it more prominent
-                borderRadius: "50%", // Make the icon circular
-                color: "#F50057", // Use a consistent color for both states
+                fontSize: { xs: 24, md: 28 }, // Responsive icon size
+                borderRadius: "50%",
+                color: "#F50057",
               },
+              mt: { xs: 1, md: 0 }, // Margin top for mobile
             }}
           />
         </CardContent>
+
+        {/* Subtasks Section */}
+        <Box sx={{ padding: { xs: 1, md: 2 } }}>
+          <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 1 }}>
+            Subtasks:
+          </Typography>
+          <List>
+            {task.subtasks.map((subtask, index) => (
+              <ListItem key={index}>
+                <ListItemIcon>{index + 1}.</ListItemIcon>
+                <ListItemText primary={subtask.title} />
+              </ListItem>
+            ))}
+          </List>
+
+          {/* Comments Section */}
+          <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 1 }}>
+            Comments:
+          </Typography>
+          <List>
+            {task.comments.map((comment, index) => (
+              <ListItem key={index}>
+                <ListItemIcon>•</ListItemIcon>
+                <ListItemText primary={comment.text} />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+
         <Box
           sx={{
             display: "flex",
             justifyContent: "flex-end",
             paddingRight: 2,
             paddingBottom: 1,
+            gap: 1, // Add some spacing between icons
           }}
         >
           <IconButton
             aria-label="edit"
             onClick={(e) => {
               e.stopPropagation();
-              handleOpen(); // Open the modal to edit the task name
+              handleOpen();
             }}
           >
             <EditIcon sx={{ color: "#F50057" }} />
@@ -175,17 +226,22 @@ export default function TaskCard({
             onChange={(e) => setEditedTitle(e.target.value)}
             fullWidth
             margin="normal"
+            sx={{ fontSize: { xs: "14px", md: "16px" } }}
           />
           <Button
             variant="contained"
             color="primary"
             onClick={handleSaveChanges}
-            sx={{ mt: 2 }}
+            sx={{ mt: 2, fontSize: { xs: "12px", md: "14px" } }}
           >
             Save Changes
           </Button>
 
-          <Typography variant="h6" mt={2}>
+          <Typography
+            variant="h6"
+            mt={2}
+            sx={{ fontSize: { xs: "16px", md: "18px" } }}
+          >
             Subtasks
           </Typography>
           <List>
@@ -198,25 +254,32 @@ export default function TaskCard({
                   checkedIcon={<CheckCircleIcon />}
                   sx={{
                     "& .MuiSvgIcon-root": {
-                      fontSize: 24, // Adjust the size as necessary
-                      borderRadius: "50%", // Ensure it's circular
-                      color: "#F50057", // Use a consistent color for both states
+                      fontSize: { xs: 20, md: 24 },
+                      borderRadius: "50%",
+                      color: "#F50057",
                     },
                   }}
                 />
-                <ListItemText primary={subtask.title} />
+                <ListItemText
+                  primary={subtask.title}
+                  sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                />
                 <IconButton
                   aria-label="edit"
                   onClick={() => handleEditSubtaskClick(subtask, index)}
                 >
-                  <EditIcon sx={{ color: "#F50057" }} />
+                  <EditIcon
+                    sx={{ color: "#F50057", fontSize: { xs: 18, md: 24 } }}
+                  />
                 </IconButton>
 
                 <IconButton
                   aria-label="delete"
                   onClick={() => onDeleteSubtask(task._id, index)}
                 >
-                  <DeleteIcon sx={{ color: "#F50057" }} />
+                  <DeleteIcon
+                    sx={{ color: "#F50057", fontSize: { xs: 18, md: 24 } }}
+                  />
                 </IconButton>
               </ListItem>
             ))}
@@ -237,6 +300,7 @@ export default function TaskCard({
                   variant="contained"
                   color="primary"
                   onClick={handleSaveSubtaskChanges}
+                  sx={{ fontSize: { xs: "12px", md: "14px" } }}
                 >
                   Save Subtask
                 </Button>
@@ -244,6 +308,7 @@ export default function TaskCard({
                   variant="outlined"
                   color="secondary"
                   onClick={handleCancelEdit}
+                  sx={{ fontSize: { xs: "12px", md: "14px" } }}
                 >
                   Cancel
                 </Button>
@@ -269,29 +334,42 @@ export default function TaskCard({
               margin="normal"
             />
             <IconButton type="submit" color="primary">
-              <AddIcon sx={{ color: "#F50057" }} />
+              <AddIcon
+                sx={{ color: "#F50057", fontSize: { xs: 20, md: 24 } }}
+              />
             </IconButton>
           </Box>
 
-          <Typography variant="h6" mt={2}>
+          <Typography
+            variant="h6"
+            mt={2}
+            sx={{ fontSize: { xs: "16px", md: "18px" } }}
+          >
             Comments
           </Typography>
           <List>
             {task.comments.map((comment, index) => (
               <ListItem key={index} disablePadding>
-                <ListItemText primary={comment.text} />
+                <ListItemText
+                  primary={comment.text}
+                  sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                />
                 <IconButton
                   aria-label="edit"
                   onClick={() => handleEditCommentClick(comment, index)}
                 >
-                  <EditIcon sx={{ color: "#F50057" }} />
+                  <EditIcon
+                    sx={{ color: "#F50057", fontSize: { xs: 18, md: 24 } }}
+                  />
                 </IconButton>
 
                 <IconButton
                   aria-label="delete"
                   onClick={() => onDeleteComment(task._id, comment._id)}
                 >
-                  <DeleteIcon sx={{ color: "#F50057" }} />
+                  <DeleteIcon
+                    sx={{ color: "#F50057", fontSize: { xs: 18, md: 24 } }}
+                  />
                 </IconButton>
               </ListItem>
             ))}
@@ -312,6 +390,7 @@ export default function TaskCard({
                   variant="contained"
                   color="primary"
                   onClick={handleSaveCommentChanges}
+                  sx={{ fontSize: { xs: "12px", md: "14px" } }}
                 >
                   Save Comment
                 </Button>
@@ -319,6 +398,7 @@ export default function TaskCard({
                   variant="outlined"
                   color="secondary"
                   onClick={handleCancelEdit}
+                  sx={{ fontSize: { xs: "12px", md: "14px" } }}
                 >
                   Cancel
                 </Button>
@@ -344,7 +424,9 @@ export default function TaskCard({
               margin="normal"
             />
             <IconButton type="submit" color="primary">
-              <AddIcon sx={{ color: "#F50057" }} />
+              <AddIcon
+                sx={{ color: "#F50057", fontSize: { xs: 20, md: 24 } }}
+              />
             </IconButton>
           </Box>
         </Box>
