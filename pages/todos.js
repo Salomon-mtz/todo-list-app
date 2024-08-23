@@ -345,7 +345,7 @@ export default function Todos() {
       </Grid>
       <form onSubmit={addTask}>
         <Grid container alignItems="center" mb={4}>
-          <Grid item xs={10}>
+          <Grid item xs={11}>
             <TextField
               label="New Task"
               value={title}
@@ -356,7 +356,7 @@ export default function Todos() {
               sx={{ fontSize: { xs: "14px", md: "16px" } }}
             />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <IconButton
               type="submit"
               color="primary"
@@ -373,11 +373,83 @@ export default function Todos() {
         value={activeTab}
         onChange={(e, newValue) => setActiveTab(newValue)}
         aria-label="task filter tabs"
-        sx={{ fontSize: { xs: "12px", md: "14px" } }}
+        sx={{
+          fontSize: { xs: "12px", md: "14px" },
+          "& .MuiTabs-indicator": {
+            backgroundColor: "#F50057", // Set the indicator color
+          },
+        }}
       >
-        <Tab value="all" label="All" />
-        <Tab value="pending" label="Pending" />
-        <Tab value="completed" label="Completed" />
+        <Tab
+          sx={{
+            color: "#F50057",
+            textTransform: "none",
+
+            "&.Mui-selected": {
+              color: "#F50057",
+              fontWeight: "bold",
+            },
+            "&:hover": {
+              color: "#F50057",
+              backgroundColor: "transparent", // Ensure background doesn't change
+            },
+            "&:focus": {
+              color: "#F50057",
+            },
+            "&:focus-visible": {
+              color: "#F50057",
+            },
+          }}
+          value="all"
+          label="All"
+        />
+
+        <Tab
+          value="pending"
+          label="Pending"
+          sx={{
+            color: "#F50057",
+            textTransform: "none",
+
+            "&.Mui-selected": {
+              color: "#F50057",
+              fontWeight: "bold",
+            },
+            "&:hover": {
+              color: "#F50057",
+              backgroundColor: "transparent", // Ensure background doesn't change
+            },
+            "&:focus": {
+              color: "#F50057",
+            },
+            "&:focus-visible": {
+              color: "#F50057",
+            },
+          }}
+        />
+        <Tab
+          value="completed"
+          label="Completed"
+          sx={{
+            color: "#F50057",
+            textTransform: "none",
+
+            "&.Mui-selected": {
+              color: "#F50057",
+              fontWeight: "bold",
+            },
+            "&:hover": {
+              color: "#F50057",
+              backgroundColor: "transparent", // Ensure background doesn't change
+            },
+            "&:focus": {
+              color: "#F50057",
+            },
+            "&:focus-visible": {
+              color: "#F50057",
+            },
+          }}
+        />
       </Tabs>
       <Grid container spacing={2} mt={2}>
         {filteredTasks.map((task) => (

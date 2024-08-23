@@ -228,14 +228,24 @@ export default function TaskCard({
             margin="normal"
             sx={{ fontSize: { xs: "14px", md: "16px" } }}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSaveChanges}
-            sx={{ mt: 2, fontSize: { xs: "12px", md: "14px" } }}
-          >
-            Save Changes
-          </Button>
+          <Box sx={{ justifyContent: "end", display: "flex" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleSaveChanges}
+              sx={{
+                mt: 2,
+                mb: 2,
+                textTransform: "none",
+                borderRadius: 10,
+                backgroundColor: "#F50057",
+                "&:hover": { backgroundColor: "#C51162" },
+                fontSize: { xs: "14px", md: "16px" },
+              }}
+            >
+              Save Changes
+            </Button>
+          </Box>
 
           <Typography
             variant="h6"
@@ -293,22 +303,36 @@ export default function TaskCard({
                 onChange={(e) => setSubtaskTitle(e.target.value)}
                 fullWidth
               />
-              <Box
-                sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}
-              >
+              <Box sx={{ display: "flex", justifyContent: "end", mt: 2 }}>
                 <Button
                   variant="contained"
                   color="primary"
                   onClick={handleSaveSubtaskChanges}
-                  sx={{ fontSize: { xs: "12px", md: "14px" } }}
+                  sx={{
+                    mt: 2,
+                    mb: 2,
+                    mr: 2,
+                    textTransform: "none",
+                    borderRadius: 10,
+                    backgroundColor: "#F50057",
+                    "&:hover": { backgroundColor: "#C51162" },
+                    fontSize: { xs: "14px", md: "16px" },
+                  }}
                 >
                   Save Subtask
                 </Button>
                 <Button
-                  variant="outlined"
+                  variant="text"
                   color="secondary"
                   onClick={handleCancelEdit}
-                  sx={{ fontSize: { xs: "12px", md: "14px" } }}
+                  sx={{
+                    mt: 2,
+                    mb: 2,
+                    textTransform: "none",
+                    borderRadius: 10,
+                    color: "#F50057",
+                    fontSize: { xs: "14px", md: "16px" },
+                  }}
                 >
                   Cancel
                 </Button>
@@ -383,14 +407,21 @@ export default function TaskCard({
                 onChange={(e) => setCommentText(e.target.value)}
                 fullWidth
               />
-              <Box
-                sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}
-              >
+              <Box sx={{ display: "flex", justifyContent: "end", mt: 2 }}>
                 <Button
                   variant="contained"
                   color="primary"
                   onClick={handleSaveCommentChanges}
-                  sx={{ fontSize: { xs: "12px", md: "14px" } }}
+                  sx={{
+                    mt: 2,
+                    mb: 2,
+                    mr: 2,
+                    textTransform: "none",
+                    borderRadius: 10,
+                    backgroundColor: "#F50057",
+                    "&:hover": { backgroundColor: "#C51162" },
+                    fontSize: { xs: "14px", md: "16px" },
+                  }}
                 >
                   Save Comment
                 </Button>
@@ -398,7 +429,14 @@ export default function TaskCard({
                   variant="outlined"
                   color="secondary"
                   onClick={handleCancelEdit}
-                  sx={{ fontSize: { xs: "12px", md: "14px" } }}
+                  sx={{
+                    mt: 2,
+                    mb: 2,
+                    textTransform: "none",
+                    borderRadius: 10,
+                    color: "#F50057",
+                    fontSize: { xs: "14px", md: "16px" },
+                  }}
                 >
                   Cancel
                 </Button>
