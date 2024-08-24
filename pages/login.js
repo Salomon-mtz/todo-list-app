@@ -40,6 +40,11 @@ export default function Login() {
     }
   };
 
+  // Function to navigate to the registration page
+  const handleNavigateToRegister = () => {
+    router.push("/register");
+  };
+
   return (
     <Container
       maxWidth="lg"
@@ -143,6 +148,22 @@ export default function Login() {
                   }}
                 >
                   Login
+                </Button>
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  color="primary"
+                  onClick={handleNavigateToRegister}
+                  sx={{
+                    textTransform: "none",
+                    borderRadius: 10,
+                    fontSize: { xs: "14px", md: "16px" },
+                    color: "#F50057",
+                    borderColor: "#F50057",
+                    "&:hover": { backgroundColor: "#FFEBEE" },
+                  }}
+                >
+                  Register
                 </Button>
               </form>
             </CardContent>

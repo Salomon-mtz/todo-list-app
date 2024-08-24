@@ -35,6 +35,11 @@ export default function Register() {
     }
   };
 
+  // Function to navigate to the login page
+  const handleNavigateToLogin = () => {
+    router.push("/login");
+  };
+
   return (
     <Container
       maxWidth="lg"
@@ -43,7 +48,7 @@ export default function Register() {
         alignItems: "center",
         justifyContent: "center",
         height: "100vh",
-        padding: { xs: 2, md: 4 }, 
+        padding: { xs: 2, md: 4 },
       }}
     >
       <Card
@@ -52,7 +57,7 @@ export default function Register() {
           flexDirection: { xs: "column", md: "row" }, // Stack vertically on small screens
           width: "100%",
           maxWidth: 1000,
-          p: { xs: 2, md: 8 }, 
+          p: { xs: 2, md: 8 },
           borderRadius: 20,
         }}
       >
@@ -63,9 +68,9 @@ export default function Register() {
                 position: "relative",
                 width: "100%",
                 height: "100%",
-                minHeight: 300, 
+                minHeight: 300,
                 maxHeight: 500,
-                mb: { xs: 2, md: 0 }, 
+                mb: { xs: 2, md: 0 },
               }}
             >
               <Image
@@ -85,14 +90,14 @@ export default function Register() {
                 alignItems: "center",
                 justifyContent: "center",
                 height: "100%",
-                padding: { xs: 2, md: 4 }, 
+                padding: { xs: 2, md: 4 },
               }}
             >
               <Typography
                 component="h1"
                 variant="h4"
                 mb={3}
-                sx={{ fontSize: { xs: "24px", md: "32px" } }} 
+                sx={{ fontSize: { xs: "24px", md: "32px" } }}
               >
                 Register
               </Typography>
@@ -108,7 +113,7 @@ export default function Register() {
                   onChange={(e) => setEmail(e.target.value)}
                   autoComplete="email"
                   autoFocus
-                  sx={{ fontSize: { xs: "14px", md: "16px" } }} 
+                  sx={{ fontSize: { xs: "14px", md: "16px" } }}
                 />
                 <TextField
                   variant="outlined"
@@ -120,7 +125,7 @@ export default function Register() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="new-password"
-                  sx={{ fontSize: { xs: "14px", md: "16px" } }} 
+                  sx={{ fontSize: { xs: "14px", md: "16px" } }}
                 />
                 <Button
                   type="submit"
@@ -134,10 +139,26 @@ export default function Register() {
                     borderRadius: 10,
                     backgroundColor: "#F50057",
                     "&:hover": { backgroundColor: "#C51162" },
-                    fontSize: { xs: "14px", md: "16px" }, 
+                    fontSize: { xs: "14px", md: "16px" },
                   }}
                 >
                   Register
+                </Button>
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  color="primary"
+                  onClick={handleNavigateToLogin}
+                  sx={{
+                    textTransform: "none",
+                    borderRadius: 10,
+                    fontSize: { xs: "14px", md: "16px" },
+                    color: "#F50057",
+                    borderColor: "#F50057",
+                    "&:hover": { backgroundColor: "#FFEBEE" },
+                  }}
+                >
+                  Login
                 </Button>
               </form>
             </CardContent>

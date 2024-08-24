@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the **Todo List Application**! This web application allows users to manage their tasks efficiently by creating, updating, deleting tasks, subtasks, and comments. It features user authentication to ensure that each user's data is secure and personalized.
+Welcome to the **Todo List Application**! This web application allows users to manage their tasks efficiently by creating, updating, and deleting tasks, subtasks, and comments. It features user authentication to ensure that each user's data is secure and personalized.
 
 **Live Demo:** [https://todo-list-app-neon-xi.vercel.app/](https://todo-list-app-neon-xi.vercel.app/)
 
@@ -17,18 +17,15 @@ Welcome to the **Todo List Application**! This web application allows users to m
 ## Technologies Used
 
 - **Frontend**:
-
   - **React**: A JavaScript library for building user interfaces.
   - **Next.js**: A React framework for server-side rendering and generating static websites.
   - **Material-UI**: A popular React UI framework for designing responsive interfaces.
 
 - **Backend**:
-
   - **Node.js**: A JavaScript runtime for building scalable network applications.
   - **Express.js**: A minimal and flexible Node.js web application framework.
 
 - **Database**:
-
   - **MongoDB**: A NoSQL database for storing application data.
 
 - **Authentication**:
@@ -45,54 +42,61 @@ Welcome to the **Todo List Application**! This web application allows users to m
 
 1. **Clone the Repository**
 
-   ```bash
-   git clone https://github.com/your-username/todo-app.git
-   cd todo-app
-   ```
+    ```bash
+    git clone https://github.com/your-username/todo-app.git
+    cd todo-list-app
+    ```
 
 2. **Install Dependencies**
 
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
-3. **Environment Variables**
+3. **Environment Variables (optional)**
 
-   Create a `.env` file in the root directory of the project and add the following environment variables:
+    Create a `.env` file in the root directory of the project and add the following environment variables:
 
-   ```env
-   MONGO_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret
-   ```
+    ```env
+    MONGO_URI=your_mongodb_connection_string
+    JWT_SECRET=your_jwt_secret
+    ```
 
-   - **MONGO_URI**: Replace `your_mongodb_connection_string` with your actual MongoDB connection string.
-   - **JWT_SECRET**: Replace `your_jwt_secret` with a strong secret key for JWT.
+    - **MONGO_URI**: Replace `your_mongodb_connection_string` with your actual MongoDB connection string.
+    - **JWT_SECRET**: Replace `your_jwt_secret` with a strong secret key for JWT.
 
 4. **Run the Backend Server**
 
-   Start the Express.js backend server using the following command:
+    Start the Express.js backend server using the following command:
 
-   ```bash
-   npm run server
-   ```
+    ```bash
+    npm run server
+    ```
 
-   - The backend server will start on `http://localhost:5001`.
+    - The backend server will start on `http://localhost:5001`.
 
 5. **Run the Frontend Development Server**
 
-   Start the Next.js frontend development server using the following command:
+    Start the Next.js frontend development server using the following command:
 
-   ```bash
-   npm run dev
-   ```
+    ```bash
+    npm run dev
+    ```
 
-   - The frontend server will start on `http://localhost:3000`.
+    - The frontend server will start on `http://localhost:3000`.
 
 6. **Access the Application**
 
-   Open your browser and navigate to `http://localhost:3000` to access the Todo List application.
+    Open your browser and navigate to `http://localhost:3000` to access the Todo List application.
 
 ## Usage
+
+### Test Credentials
+
+You can log in to the application using the following credentials:
+
+- **Email**: mtzelisalomon@gmail.com
+- **Password**: salo123
 
 - **Register**: Create a new account by registering with your email and password.
 - **Login**: Access your account by logging in with your credentials.
